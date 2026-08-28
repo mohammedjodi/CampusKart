@@ -21,32 +21,44 @@ class AddProfileFieldsToUsers extends Migration
                 'null' => false,
                 'after' => 'first_name'
             ],
-            'university'  => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+            'university_id'  => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
                 'null' => false,
                 'after' => 'last_name'
             ],
             'avatar' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-                'null' => false,
-                'after' => 'university'
+                'null' => true,
+                'after' => 'university_id'
             ],
 
         ];
 
         //adding this fields to the current users table that is provided by Shield to allow users to enter our own custom information 
             $this->forge->addColumn('users' , $fields);
+        
+        //Foreign Keys for Users Table 
+        //users.university_id -> University.id 
+        $this->forge->addForeignKey(
+            'university_id',
+            'university',
+            'id',
+            'CASCADE',
+            'RESTRICT'
+        );
 
     }
 
     public function down()
     {
+        $this->forge->dropForeignKey('users' , 'university_id');
         $this->forge->dropColumn('users' , [
             'first_name',
             'last_name',
-            'university',
+            'university_id',
             'avatar',
         ]);
     }

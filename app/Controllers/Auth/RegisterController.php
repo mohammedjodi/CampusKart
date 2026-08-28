@@ -61,7 +61,7 @@ class RegisterController extends ShieldRegisterController
         //Grab our custom fields from the post 
         $user->first_name= $this->request->getPost('first_name');
         $user->last_name= $this->request->getPost('last_name');
-        $user->university= $this->request->getPost('university');
+        // $user->university= $this->request->getPost('university');
         $user->avatar= $avatarPath;
         // Workaround for email only registration/login
         if ($user->username === null) {
