@@ -1,24 +1,55 @@
-# Codeigniter 4 Authentication Template 
-A reusable Codeigniter 4 stater project with:
+#CampusKart 
 
--Codeigniter Shield Authentication 
--Custom registeration 
--Login with email you can also login with username but you first have to configure `app\Auth.php`
--User Avatar Upload #still got a ton of work to do here 
--Password Reset //Havent Added DeskApp view for the template 
--DeskApp Admin Template  //You might have to set that up 
--MySQL database 
--Custom authentication views // so far i have just done `Register.php ` and `Login.php`
+CampusKart is a student-focused marketplace where students can buy and sell products within their campus community.
 
-## Requirements
--PHP 8.2+
--composer 
--MySQL
--Codeigniter 4
+The goal is to make it easier for students to discover products, connect with sellers, and trade in a simple and convenient ways.
 
-## Installation
-Clone the Repository:
+# Features To be Added 
 
-```bash
-git clone 
- 
+* User registration and authentication
+* Student profiles
+* Product listing and management
+* Product categories
+* Product images
+* University and location-based listings
+* Product search and browsing
+* Admin management
+* Responsive interface
+
+# CampusKart is currently under active development. Some features are still being implemented.
+
+## Built With:
+* Figma — UI/UX design
+* PHP
+* CodeIgniter 4
+* CodeIgniter Shield — Authentication
+* MySQL
+* JavaScript/Jquery
+* Bootstrap
+
+
+# Authentication
+
+CampusKart uses CodeIgniter Shield for authentication and authorization.
+though i added some cutom Feilds and auth controllers 
+
+## User authentication includes features such as:
+
+* Registration
+* Login
+* Logout
+* Password management
+* User roles and permissions
+
+## Current development focuses on:
+
+* Database structure
+* Authentication customization
+* User profiles
+* University and location management
+* Product management
+* Admin functionality
+
+
+And solving migration issues :(
+
