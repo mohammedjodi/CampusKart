@@ -1,4 +1,4 @@
-#CampusKart 
+# CampusKart 
 
 CampusKart is a student-focused marketplace where students can buy and sell products within their campus community.
 

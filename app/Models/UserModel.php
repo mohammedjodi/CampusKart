@@ -18,7 +18,10 @@ class UserModel extends ShieldUserModel
             // add our custom fields for campuskart 
             'first_name',
             'last_name',
-            'university',
+            'university_id',
+            'phone',
+            'bio',
+            'state_id',
             'avatar',
         ];
     }
