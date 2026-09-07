@@ -1,0 +1,349 @@
+*{
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --ck-orange: #F7941E;
+    --ck-orange-dark: #D97706;
+    --ck-orange-light: #FBBF24;
+    --ck-gray: #F3F4F6;
+    --main-color:  #00c476 ;
+    --dark-color: rgb(92, 255, 71);
+    --color-green: #00c476;
+    --color-bg: #e0dddd;
+    --color-red: #da0f3f;
+    --step-color:#ced7e8;
+    --step-size: 32px;
+    /* --steps: 4; */
+    --progress-width: calc((var(--steps) - 1) / var(--steps) * 100%);
+}
+
+
+
+.form-container h1{
+    text-align: center;
+    margin-bottom: 16px;
+    color: #000;
+}
+
+.form-container label{
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+
+.form-container h3{
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.form-container input,
+.form-container textarea {
+  outline: var(--main-color) solid 0 0 0 2px;
+  border: none;
+  border-bottom: 2px solid var(--ck-orange);
+  padding: 8px 16px;
+  width: 100%;
+  font-size: 1rem;
+  text-align: start;
+  margin-bottom: 16px;
+}
+
+.form-container input[type="file"].avatar {
+    border: 2px dashed rgba(247, 148, 30, 0.8);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 196, 118, 0.06), rgba(247, 148, 30, 0.08));
+    padding: 12px 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: inset 0 0 0 1px rgba(0, 196, 118, 0.08);
+}
+
+.form-container input[type="file"].avatar:hover,
+.form-container input[type="file"].avatar:focus {
+    border-color: var(--ck-orange-dark);
+    box-shadow: 0 0 0 4px rgba(255, 167, 2, 0.1);
+}
+
+.form-container input[type="file"].avatar::file-selector-button {
+    margin-right: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--ck-orange), var(--ck-orange-light));
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.form-container input[type="file"].avatar::file-selector-button:hover {
+    opacity: 0.96;
+    transform: translateY(-1px);
+}
+
+.form-container textarea{
+    resize: none;
+    border: 2px solid var(--ck-orange);
+    border-radius: 4px;
+
+    
+}
+
+.form-container button{
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+
+.form-container button:disabled{
+    opacity: 0.8;
+}
+
+.form-container button:focus{
+    outline-color: #333;
+}
+
+
+
+.form-container button[type="submit"]{
+    background-color: rgb(227, 148, 0);
+}
+
+.form-container button[type="submit"]:hover ,
+.form-container  button[type="submit"]:active{
+    background-color: rgb(251, 163, 0);
+}
+
+
+
+.form-container select{
+    appearance: base-select;
+    background: #fff;
+    padding: 8px 24px ;
+    color: #000;
+    font-weight: 900;
+    border: 2px solid var(--ck-orange);
+    max-width: 300px;
+    overflow-x: hidden;
+    border-radius: 8px;
+    margin: 8px 3px;
+}
+
+
+.controls .prev-btn{
+    background-color: var(--color-red);
+}
+
+.prev-btn:hover , .prev-btn:active{
+    background-color: #bd264a;
+}
+
+.next-btn:hover , .next-btn:active{
+    background: var(--ck-orange-dark);
+}
+.prev-btn::before{
+    content: "←";
+    margin-inline-end: 4px;
+}
+
+.next-btn::after{
+    content: "→";
+    margin-inline-start: 4px;
+}
+
+.next-btn{
+    background: linear-gradient(90deg, var(--ck-orange), var(--ck-orange-light));
+
+}
+/* Form styles */
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* margin-top: 5rem; */
+}
+.form-wizard{
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 8px;
+    width:min(600px, 90%);
+    box-shadow: 0 4px 4px rgba(167, 21, 84, 0.1);
+}
+
+.progress-container{
+    position: relative;
+}
+
+.progress-container::before{
+    content: "";
+    height: 4px;
+    width:var(--progress-width);
+    background-color: var(--step-color);
+    position: absolute ;
+    top: calc(var(--step-size)/2);
+    left: 52%;
+    translate: -50% -50%;
+
+}
+
+.progress-container ol{
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    counter-reset: step-number;
+    position: relative;
+    z-index: 3;
+}
+
+.progress-container li{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--step-color);
+    transition: 0.3s linear 0.3s;
+}
+
+.progress-container li::before{
+    counter-increment: step-number ;
+    content: counter(step-number);
+    background-color: var(--step-color);
+    width: var(--step-size);
+    height: var(--step-size);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: 0.3s linear 0.3s;
+
+}
+
+/* done and current steps styles */
+.progress-container .progress{
+    height: 4px;
+    width: var(--progress-width);
+    background-color: var(--ck-orange);
+    position: absolute ;
+    top: calc(var(--step-size)/2);
+    left: 53%;
+    translate: -50% -50%;
+    z-index: 2;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 0.3s;
+
+}
+.progress-container li:where(.done , .current){
+    color: #333;
+    font-weight: 500;
+}
+
+.progress-container li.done::before{
+    content: "✓";
+    background-color: var(--ck-orange);
+}
+
+.progress-container li.current::before{
+    background-color: var(--ck-orange);
+    box-shadow: 0 0 0  3px rgba(250, 167, 1, 0.25);
+}
+
+
+/*  Controls  */
+.controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+    padding-inline: 8px;
+}
+
+.controls button{
+    flex: 1;
+}
+
+
+/* steps / page  */
+.steps-container{
+    display: flex;
+    overflow: hidden;
+   
+}
+
+.step{
+    flex: 1 0 100%;
+    padding: 24px 8px;
+    opacity: 0;
+    transition: opacity 0.3s ;
+    height: fit-content;
+    display: grid;
+    gap: 8px;
+}
+
+.step.current{
+    opacity: 1;
+}
+
+
+.completed {
+    text-align: center;
+}
+
+.completed h3{
+    margin-bottom: 8px;    
+}
+
+.completed svg{
+    width: 100px;
+    height: 100px;
+    stroke: yellowgreen;
+}
+
+
+.completed:not([hidden]) ~ * {
+  display: none;
+}
+
+
+.login{
+    text-align: center;
+    margin-top: 16px;
+}
+
+.login a{
+    color: var(--ck-orange-dark);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.input-control{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+/*===================================== MAIN CSSS OVERRIDE  ==========================*/
+.auth-links{
+    font-size: 20px;
+    
+}

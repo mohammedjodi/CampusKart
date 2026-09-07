@@ -13,3 +13,6 @@ $routes->get('register' , '\App\Controllers\Auth\RegisterController::registerVie
 
 service('auth')->routes($routes);
 $routes->post('register' , '\App\Controllers\Auth\RegisterController::registerAction');
+
+// Route for Js to get our Universities using state_id 
+$routes->get('register/universities/(:num)' , '\App\Controllers\Auth\RegisterController::Universities/$1');

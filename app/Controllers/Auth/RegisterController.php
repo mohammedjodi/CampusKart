@@ -12,6 +12,11 @@ use CodeIgniter\Shield\Authentication\Authenticators\Session;
 use CodeIgniter\Shield\Exceptions\ValidationException;
 use CodeIgniter\Events\Events;
 
+// states and University Models
+use App\Models\StatesModel;
+use App\Models\UniversitiesModel;
+
+
 class RegisterController extends ShieldRegisterController
 {
     /**
@@ -105,7 +110,35 @@ class RegisterController extends ShieldRegisterController
 
     public function registerView()
     {
-         return parent::registerView();
+        // Sheilds Default checks 
+        if (auth()->loggedIn()) {
+            return redirect()->to(config('Auth')->registerRedirect());
+        }
+
+        // Check if registration is allowed
+        if (! setting('Auth.allowRegistration')) {
+            return redirect()->back()->withInput()
+                ->with('error', lang('Auth.registerDisabled'));
+        }
+
+        /** @var Session $authenticator */
+        $authenticator = auth('session')->getAuthenticator();
+
+        // If an action has been defined, start it up.
+        if ($authenticator->hasAction()) {
+            return redirect()->route('auth-action-show');
+        }
+
+        $stateModel = new StatesModel();
+
+        $data = [
+            'states' => $stateModel->findAll(),
+        ];
+
+        //return shields view but append our cutom data to it 
+        return $this->view(setting('Auth.views')['register'] , $data);
+
+
     }
 
     public function getValidationRules(): array
@@ -113,13 +146,13 @@ class RegisterController extends ShieldRegisterController
         $rules = parent::getValidationRules();
 
         // Add custom validation rules for the new fields
-        $rules['first_name'] = [
+        $rules['first-name'] = [
             'rules' => 'required|min_length[3]'
         ];
-        $rules['last_name'] = [
+        $rules['last-name'] = [
             'rules' => 'required|min_length[3]'
         ];
-        $rules['university'] = [
+        $rules['university_id'] = [
             'rules' => 'required|min_length[3]'
         ];
         $rules['avatar'] = [
@@ -132,6 +165,15 @@ class RegisterController extends ShieldRegisterController
             ];
 
         return $rules;
+    }
+
+    //Returning  a list of universities to a specific state to our js client  
+    public function Universities($state_id){
+        $universityModel = new UniversitiesModel();
+
+        $universites = $universityModel->where('state_id' , $state_id)->findAll();
+
+        return $this->response->setJSON($universites);
     }
 }
 
