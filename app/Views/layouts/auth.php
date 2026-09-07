@@ -1,79 +1,84 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<!-- Basic Page Info -->
-		<meta charset="utf-8" />
-		<title><?= $this->renderSection('title') ?></title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="<?= base_url('images/campuskart_logo.png')?>"
+    />
 
-		<!-- Site favicon -->
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="<?= base_url('vendors/images/apple-touch-icon.png')?>"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="<?= base_url('vendors/images/favicon-32x32.png')?>"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="<?= base_url('vendors/images/favicon-16x16.png')?>"
-		/>
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+        <!-- Font awesome  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- CSS DESKAPP  -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/styles/core.css')?> "/>
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="<?= base_url('vendors/styles/icon-font.min.css')?>"
+    />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/styles/style.css')?>"/> 
+    <link rel="stylesheet" type="text/css" href="<?= base_url('src/styles/style.css ')?>"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css')?>">
+    <!-- Default CSS -->
+    <link rel="stylesheet" href="<?= base_url('css/MultiStepForm.css')?>">
 
-		<!-- Mobile Specific Metas -->
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, maximum-scale=1"
-		/>
+    <link rel="stylesheet" href="<?= base_url('css/styles.css')?>">
 
-		<!-- Google Font -->
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-			rel="stylesheet"
-		/>
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="<?= base_url('vendors/styles/core.css')?>" />
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="<?= base_url('vendors/styles/icon-font.min.css') ?>"
-		/>
-		<link rel="stylesheet" type="text/css" href="<?= base_url('vendors/styles/style.css')?>" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url('src/styles/style.css')?>" />
+    <title>Multistep Form</title>
+</head>
+<body>
 
-		
-	</head>
-	<body class="login-page">
-		<div class="login-header box-shadow">
-			<div
-				class="container-fluid d-flex justify-content-center align-items-center"
-			>
-				<div class="brand-logo">
-					<a href="login.html">
-						<img src="<?= base_url('vendors/images/CampusKart.svg')?>" alt="" />
-					</a>
-				</div>
-				<!-- <div class="login-menu">
-					<ul>
-						<li><a href="register.html">Register</a></li>
-					</ul>
-				</div> -->
-			</div>
-		</div>
-		
-		<?= $this->renderSection('content')?>
-						
-		
-			
-		<!-- js -->
-		<script src="<?= base_url('vendors/scripts/core.js')?>"></script>
-		<script src="<?= base_url('vendors/scripts/script.min.js')?>"></script>
-		<script src="<?= base_url('vendors/scripts/process.js')?>"></script>
-		<script src="<?= base_url('vendors/scripts/layout-settings.js')?>"></script>
-		
-	</body>
+     <header class="site-header">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between py-2 px-2">
+      
+      <!-- Left: Hamburger + Logo IMG -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Logo Image -->
+        <a href="/">
+          <img src="images/Logo.png" alt="CampusKart Logo" class="header-logo">
+        </a>
+      </div>
+
+       
+        <div class=" d-flex gap-2 text-white  slogan">
+          <a href="/login" class="text-white text-decoration-none auth-links">Signin</a>
+          <span class="auth-links">|</span>
+          <a href="/register" class="text-white text-decoration-none auth-links">Register</a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+
+
+
+	<?= $this->renderSection("content")?>
+       
+    <!--  DeskApp js -->
+    <script src="<?=base_url('vendors/scripts/core.js')?>"></script>
+    <script src="<?=base_url('vendors/scripts/script.min.js')?>"></script>
+    <script src="<?=base_url('vendors/scripts/process.js')?>"></script>
+    <script src="<?=base_url('vendors/scripts/layout-settings.js')?>"></script>
+    <!-- Bootstrap js -->
+     <script src="<?= base_url('bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+     <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+
+    <!-- Defualt js -->
+
+    <script src="<?= base_url('js/MultiStepForm.js')?>"></script>
+</body>
 </html>
