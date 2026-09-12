@@ -8,6 +8,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = form.querySelector(".next-btn");
     const submitBtn = form.querySelector(".submit-btn");
 
+    //Getting all input fields by id 
+    const firstName = document.getElementById('first-name');
+    const lastName = document.getElementById('last-name');
+    const email = document.getElementById('floatingEmailInput');
+    const stateInput = document.getElementById('state');
+    const universityInput = document.getElementById('university');
+    const username = document.getElementById('floatingUsernameInput');
+    const password = document.getElementById('floatingPasswordInput');
+    const confirmPassword = document.getElementById('floatingPasswordConfirmInput');
+
+    //Grabbing all the error containers for each field 
+    const firstNameError = document.getElementById('firstNameError');
+    const  lastNameError= document.getElementById('lastNameError');
+    const emailError = document.getElementById('emailError');
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+    const ConfirmPasswordError = document.getElementById('ConfirmPasswordError');
+    const stateError = document.getElementById('stateError');
+    const universityError = document.getElementById('universityError');
+
+
     //adjust the amount of steps dynamically based on the number of steps in the form
     document.documentElement.style.setProperty("--steps", stepIndicators.length);
 
@@ -43,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const isValidStep = () => {
-        const fields = steps[currentStep].querySelectorAll("input, textarea"); // Get all input fields in the current step
+        const fields = steps[currentStep].querySelectorAll("input, textarea , select"); // Get all input fields in the current step
 
         return [...fields].every((field) => field.reportValidity()); // Check if all input fields in the current step are valid
     }
@@ -235,29 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
         
     }
-
-     //Getting all input fields by id 
-    const firstName = document.getElementById('first-name');
-    const lastName = document.getElementById('last-name');
-    const email = document.getElementById('floatingEmailInput');
-    const stateInput = document.getElementById('state');
-    const universityInput = document.getElementById('university');
-    const username = document.getElementById('floatingUsernameInput');
-    const password = document.getElementById('floatingPasswordInput');
-    const confirmPassword = document.getElementById('floatingPasswordConfirmInput');
-
-    //Grabbing all the error containers for each field 
-    const firstNameError = document.getElementById('firstNameError');
-    const  lastNameError= document.getElementById('lastNameError');
-    const emailError = document.getElementById('emailError');
-    const usernameError = document.getElementById('usernameError');
-    const passwordError = document.getElementById('passwordError');
-    const ConfirmPasswordError = document.getElementById('ConfirmPasswordError');
-    const stateError = document.getElementById('stateError');
-    const universityError = document.getElementById('universityError');
-
-
-
 
     //This functions gets the Input field and name of the input then passes them both to validateField().......
     function InputEvent(inputField , name  , errorElement){
