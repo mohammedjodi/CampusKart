@@ -45,7 +45,7 @@
       <div class="d-flex align-items-center gap-2">
         <!-- Logo Image -->
         <a href="/">
-          <img src="images/Logo.png" alt="CampusKart Logo" class="header-logo">
+          <img src="<?= base_url('images/Logo.png')?>" alt="CampusKart Logo" class="header-logo">
         </a>
       </div>
 

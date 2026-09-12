@@ -145,6 +145,24 @@ class RegisterController extends ShieldRegisterController
     {
         $rules = parent::getValidationRules();
 
+        // OVERRIDE SHIELD'S PASSWORD RULE FOR REGISTRATION AJAX
+        $rules['password'] = [
+            'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/]',
+            'errors' => [
+                'required' => 'Password is required',
+                'min_length' => 'Password must be at least 8 characters',
+                'regex_match' => 'Password must contain uppercase, lowercase, number and special character'
+            ]
+        ];
+        $rules['password_confirm'] = [
+            'rules' => 'required|min_length[8]',
+            'errors' => [
+                'required' => 'Please confirm your password',
+                'min_length' => 'Password must be at least 8 characters'
+            ]
+        ];
+
+
         // Add custom validation rules for the new fields
         $rules['first-name'] = [
             'rules' => 'required|min_length[3]'
@@ -152,8 +170,18 @@ class RegisterController extends ShieldRegisterController
         $rules['last-name'] = [
             'rules' => 'required|min_length[3]'
         ];
+       
         $rules['university_id'] = [
-            'rules' => 'required|min_length[3]'
+            'rules' => 'required|is_not_unique[Campuses.id]'
+        ];
+        $rules['state_id'] = [
+            'rules' => 'required|is_not_unique[states.id]'
+        ];
+        $rules['phone'] = [
+            'rules' => 'required|regex_match[/^(?:\+234|0)[789][01]\d{8}$/]|is_unique[users.phone]'
+        ];
+        $rules['bio'] = [
+            'rules' => 'permit_empty|max_length[500]'
         ];
         $rules['avatar'] = [
             'rules' => 'permit_empty|is_image[avatar]|mime_in[avatar,image/png,image/jpeg,image/jpg]|max_size[avatar,2048]',
@@ -174,6 +202,59 @@ class RegisterController extends ShieldRegisterController
         $universites = $universityModel->where('state_id' , $state_id)->findAll();
 
         return $this->response->setJSON($universites);
+    }
+
+    /* 
+        This Method gets a request from Ajax which passes
+        the `Field` , `value` and then the method proccess
+        that request using shields  getValidationRules() and then
+        returns the errors if an as a json for the Ajax 
+    */
+    public function validateField(){
+        $field = $this->request->getPost('field');
+        $value = $this->request->getPost('value');
+
+        //Get registration validation rules 
+        $rules = $this->getValidationRules();
+
+        //Make sure the request field exists 
+        if(!isset($rules[$field])) {
+            return $this->response->setJSON([
+                'valid' => false,
+                'message' => "Invalid field",
+                   
+            ])->setStatusCode(404);
+        }
+
+        //create validator 
+        $validation = service('validation');
+
+        //give the validator ONLY the rule for this field 
+        $validation->setRules(
+        [
+            $field => $rules[$field]['rules']
+        ],
+        [
+            $field => $rules[$field]['errors'] ?? []
+        ]);
+
+        // validate 
+        if(! $validation->run([
+            $field => $value
+        ])){
+            
+            return $this->response->setJSON([
+                'valid' => false,
+                'errors' => $validation->getErrors()[$field]
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'valid' => true ,
+            'success' => 'Valid*',
+            'errors' => [],
+        ]);
+
     }
 }
 
