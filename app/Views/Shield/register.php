@@ -4,9 +4,9 @@
 
 <?= $this->section('content') ?>
 <div class="form-container">
-    <form action="<?= url_to('register') ?>" method="post" class="form-wizard">
+    <form action="<?= url_to('register') ?>" method="post" class="form-wizard" enctype="multipart/form-data">
          <?= csrf_field() ?>
-        <h1>Registration</h1>
+        <h1 class="login-title">Registration</h1>
 
         <!-- Submission Success Message -->
         <div class="completed" hidden>
@@ -28,20 +28,20 @@
                 <li>Account Info</li>
                 <li>About</li>
             </ol>
-             <div id="validationError">
-            </div>
+            
+             <div id="validationError"></div>
         </div>
         <div class="steps-container">
             <div class="step">
                 <h3>Personal Information</h3>
                 <div class="input-control">
                     <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" name="first-name"  placeholder="First name" required>
+                    <input type="text" id="first-name" name="first_name"  placeholder="First name" required>
                     <div id="firstNameError" class=" mb-3 bold "></div>
                 </div>
                  <div class="input-control">
                     <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" name="last-name" placeholder="Last name"required>
+                    <input type="text" id="last-name" name="last_name" placeholder="Last name"required>
                     <div id="lastNameError" class=" mb-3 bold "></div>
 
                 </div>
@@ -101,6 +101,12 @@
                 <div class="input-control">
                     <label for="bio">Bio:</label>
                     <textarea id="bio" name="bio" placeholder="Optional.............."></textarea>
+                </div>
+                <div class="input-control">
+                    <label for="phone">phone:</label>
+                    <input type="phone" name="phone" placeholder="0802323436"  id="phone" required>
+                    <div id="phoneError" class=" mb-3 bold "></div>
+                    
                 </div>
                 <div class="input-control">
                     <label for="avatar">avatar:</label>

@@ -33,11 +33,11 @@
 
     <link rel="stylesheet" href="<?= base_url('css/styles.css')?>">
 
-    <title>Multistep Form</title>
+    <title><?= $this->renderSection('title')?></title>
 </head>
 <body>
 
-     <header class="site-header">
+<header class="site-header">
   <div class="container">
     <div class="d-flex align-items-center justify-content-between py-2 px-2">
       
@@ -50,11 +50,11 @@
       </div>
 
        
-        <div class=" d-flex gap-2 text-white  slogan">
+        <!-- <div class=" d-flex gap-2 text-white  slogan">
           <a href="/login" class="text-white text-decoration-none auth-links">Signin</a>
           <span class="auth-links">|</span>
           <a href="/register" class="text-white text-decoration-none auth-links">Register</a>
-        </div>
+        </div> -->
 
       </div>
 

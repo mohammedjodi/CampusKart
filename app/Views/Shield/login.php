@@ -4,20 +4,19 @@
 <?= $this->section('title') ?><?= lang('Auth.login') ?> <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+<div class="form-container">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 col-lg-7">
+            <!-- <div class="col-md-6 col-lg-7">
                 <img src="<?=base_url('vendors/images/login-page-img.png')?>" alt=""/>
-            </div>
-            <div class="col-md-6 col-lg-5">
+            </div> -->
+            <div class="col-md-12 col-lg-12 ">
 
-            <div class="login-box bg-white box-shadow border-radius-10">
+            <div class="login-box bg-white box-shadow border-radius-10 ">
                 <div class="login-title">
-                    <h2 class="text-center text-primary">Login </h2>
+                    <h2 class="text-center text-dark">Login </h2>
                 </div>
             <pre>
-                <!-- <?php //var_dump(session()->getFlashdata()) ?> -->
             </pre>
              <?php if (session('error') !== null) : ?>
                 <div class="alert alert-danger" role="alert"><?= esc(session('error')) ?></div>
@@ -41,20 +40,23 @@
                 <?= csrf_field() ?>
 
                 <!-- Email -->
-                <div class="input-group custom">
-
-                    <input type="email" class="form-control form-control-lg" id="floatingEmailInput" name="email"   inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required>
-                    <!-- <label for="floatingEmailInput"> //lang('Auth.email') </label> -->
-                    <div class="input-group-append custom">
-                        <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                <div class="input-control">
+                    <label for="email">Email:</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required>
+                        <div class="input-group-append custom">
+                            <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                        </div>
                     </div>
                 </div>
                 <!-- Password -->
-                <div class="input-group custom">
-                    <input type="password" class="form-control" id="floatingPasswordInput" name="password" inputmode="text" autocomplete="current-password" placeholder="<?= lang('Auth.password') ?>" required>
-                    <!-- <label for="floatingPasswordInput">lang('Auth.password') </label> -->
-                    <div class="input-group-append custom">
-                        <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
+                <div class="input-control">
+                    <label for="password">Password:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="floatingPasswordInput" name="password" inputmode="text" autocomplete="current-password" placeholder="<?= lang('Auth.password') ?>" required>
+                        <div class="input-group-append custom">
+                            <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
+                        </div>
                     </div>
                 </div>
 
@@ -63,9 +65,9 @@
                     <div class="row pb-30">
                         <div class="col-6">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" name="remember" class='custom-control-input'  id="customCheck1" <?php if (old('remember')): ?> checked<?php endif ?>>
+                                <!-- <input type="checkbox" name="remember" class='custom-control-input'  id="customCheck1" <?php if (old('remember')): ?> checked<?php endif ?>> -->
 
-                                <label class="custom-control-label" for="customCheck1"><?= lang('Auth.rememberMe') ?></label>
+                                <!-- <label class="custom-control-label" for="customCheck1"><?= lang('Auth.rememberMe') ?></label> -->
                                 
                             </div>
                         </div>
@@ -81,16 +83,16 @@
                 <?php endif; ?>
 
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 flex-1">
                         <div class="input-group mb-0">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block"><?= lang('Auth.login') ?></button>
+                            <button type="submit" class="btn  btn-lg btn-block next-btn text-bold"><?= lang('Auth.login') ?></button>
                         </div>
                         <?php if (setting('Auth.allowRegistration')) : ?>
                         <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">
                                 OR
                         </div>
                         <div class="input-group mb-0">
-                            <a href="<?= url_to('register')  ?>"  class="btn btn-outline-primary btn-lg btn-block"><?= lang('Auth.register') ?></a>
+                            <a href="<?= url_to('register')  ?>" class="btn auth-gradient-outline btn-lg btn-block "><?= lang('Auth.register') ?></a>
                         </div>
                     </div>
                 </div>
@@ -104,4 +106,9 @@
         </div>
     </div>
 </div>
+
+<style>
+
+</style>
+
 <?= $this->endSection() ?>
