@@ -41,33 +41,44 @@ class RegisterController extends ShieldRegisterController
         // like the password, can only be validated properly here.
         $rules = $this->getValidationRules();
 
-        //upload the avatar after validation 
+        if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+
+        //get the post data 
+        $allowedPostFields = array_keys($rules);
+        // dd($allowedPostFields);
+
+        $registrationData = $this->request->getPost($allowedPostFields);
+        //Remove avatar from the array because we handle it manually
+        unset($registrationData['avatar']); 
+
+        //Handle Optional avatar 
+        $avatarPath = null ;
         $avatar = $this->request->getFile('avatar');
-    
-        // $avatarName = null;
-        if($avatar->isValid() && !$avatar->hasMoved()){
+        if($avatar && $avatar->isValid() && !$avatar->hasMoved()){
             //rename the avatar to be unique 
             $avatarName = $avatar->getRandomName();
+
             //move the avatar 
-            $avatar->move(FCPATH . 'public/uploads/avatars' , $avatarName);
+            $avatar->move(
+                FCPATH . 'uploads/avatars' ,
+                $avatarName
+                );
+
             $avatarPath = 'uploads/avatars/' . $avatarName;
 
         }
 
-        if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
+        //Add the avatar path back to the registiration data 
+        $registrationData['avatar'] = $avatarPath;
+        
+        // dd($registrationData );
         
         
-        // dd($this->request->getPost());
         // Save the user
-        $allowedPostFields = array_keys($rules);
-        $user              = $users->createNewUser($this->request->getPost($allowedPostFields));
-        //Grab our custom fields from the post 
-        $user->first_name= $this->request->getPost('first_name');
-        $user->last_name= $this->request->getPost('last_name');
-        // $user->university= $this->request->getPost('university');
-        $user->avatar= $avatarPath;
+        $user = $users->createNewUser($registrationData);
         // Workaround for email only registration/login
         if ($user->username === null) {
             $user->username = null;
@@ -164,10 +175,10 @@ class RegisterController extends ShieldRegisterController
 
 
         // Add custom validation rules for the new fields
-        $rules['first-name'] = [
+        $rules['first_name'] = [
             'rules' => 'required|min_length[3]'
         ];
-        $rules['last-name'] = [
+        $rules['last_name'] = [
             'rules' => 'required|min_length[3]'
         ];
        
@@ -178,19 +189,20 @@ class RegisterController extends ShieldRegisterController
             'rules' => 'required|is_not_unique[states.id]'
         ];
         $rules['phone'] = [
-            'rules' => 'required|regex_match[/^(?:\+234|0)[789][01]\d{8}$/]|is_unique[users.phone]'
+            'rules' => 'required|regex_match[/^(?:\+234|0)[789][01]\d{8}$/]|is_unique[users.phone]|max_length[11]|min_length[11]'
         ];
         $rules['bio'] = [
             'rules' => 'permit_empty|max_length[500]'
         ];
-        $rules['avatar'] = [
-            'rules' => 'permit_empty|is_image[avatar]|mime_in[avatar,image/png,image/jpeg,image/jpg]|max_size[avatar,2048]',
-            'errors' => [
-                'is_image' => 'Avatar must be a JPG or PNG image',
-                'mime_in' => 'Avatar must be a JPG or PNG image',
-                'max_size' => 'Avatar cannot be larger than 2MB'
-            ]
-            ];
+        //avatar validation is handled by js locally 
+        // $rules['avatar'] = [
+        //     'rules' => 'permit_empty|is_image[avatar]|mime_in[avatar,image/png,image/jpeg,image/jpg]|max_size[avatar,2048]',
+        //     'errors' => [
+        //         'is_image' => 'Avatar must be a JPG or PNG image',
+        //         'mime_in' => 'Avatar must be a JPG or PNG image',
+        //         'max_size' => 'Avatar cannot be larger than 2MB'
+        //     ]
+        //     ];
 
         return $rules;
     }

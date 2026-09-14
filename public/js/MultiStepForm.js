@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const username = document.getElementById('floatingUsernameInput');
     const password = document.getElementById('floatingPasswordInput');
     const confirmPassword = document.getElementById('floatingPasswordConfirmInput');
+    const phone = document.getElementById('phone');
 
     //Grabbing all the error containers for each field 
     const firstNameError = document.getElementById('firstNameError');
@@ -25,8 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const usernameError = document.getElementById('usernameError');
     const passwordError = document.getElementById('passwordError');
     const ConfirmPasswordError = document.getElementById('ConfirmPasswordError');
+    const phoneError = document.getElementById('phoneError');
     const stateError = document.getElementById('stateError');
     const universityError = document.getElementById('universityError');
+
 
 
     //adjust the amount of steps dynamically based on the number of steps in the form
@@ -143,6 +146,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    submitBtn.addEventListener("click", (e) => { 
+        if (hasErrorsInCurrentStep()) { // 
+            e.preventDefault();
+            const validationError = document.getElementById('validationError');
+            validationError.classList.add('text-danger');
+            validationError.textContent = 'Please fix the errors before proceeding';
+
+            return;
+        }else{
+            validationError.classList.remove('text-danger');
+            validationError.textContent = '';
+        }
+
+    });
     updateProgress(); // Initial call to set the progress bar and step indicators on page load
 
     const state = document.getElementById('state');
@@ -156,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`register/universities/${stateId}`)
             .then(response => response.json())
             .then(data => {
-
+ 
                 university.innerHTML = '<option value="" > Select university</option>';
                 
                 //populating the select with the data we got from our controller 
@@ -318,11 +335,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //Adding the event listener to all the fields 
-    InputEvent(firstName , 'first-name' , firstNameError);
-    InputEvent(lastName , 'last-name' , lastNameError);
+    InputEvent(firstName , 'first_name' , firstNameError);
+    InputEvent(lastName , 'last_name' , lastNameError);
     InputEvent(email , 'email' , emailError);
     InputEvent(username, 'username' , usernameError)
     InputEvent(password , 'password' , passwordError);
+    InputEvent(phone , 'phone' , phoneError);
     
     // Special case for selects - validate on change
     if(stateInput){

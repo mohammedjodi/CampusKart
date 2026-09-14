@@ -124,3 +124,8 @@ _modules/*
 
 /results/
 /phpunit.xml
+
+
+#User Images 
+/public/uploads/avatars/*
+!/public/uploads/avatars/.gitKeep

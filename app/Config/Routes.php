@@ -10,9 +10,9 @@ $routes->get('/', 'Home::index');
 service('auth')->routes($routes , ['except' => ['register']]);
 //custom routes for shield 
 $routes->get('register' , '\App\Controllers\Auth\RegisterController::registerView');
-
-service('auth')->routes($routes);
 $routes->post('register' , '\App\Controllers\Auth\RegisterController::registerAction');
+
+// service('auth')->routes($routes);
 
 //AJAX ROUTES
 $routes->group('register', ['namespace' => 'App\Controllers\Auth'] ,function($routes){
