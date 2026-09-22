@@ -763,7 +763,7 @@ button.form-select:hover:not(:disabled) {
         background: #fff;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        padding: 12px 0 50px 0;
+        padding: 12px 0 0 0;
         height: max-content;
 
     }
@@ -774,19 +774,12 @@ button.form-select:hover:not(:disabled) {
         font-weight: 600;
         font-size: 17px;
         border-bottom: 1px solid #d9d8d8;
-        /* margin-bottom: 8px; */
     }
 
     .sidebar-header i{
       padding: 0 8px  0 0;
     }
-    /* .sidebar-header::before {
-        content: "‹";
-        font-size: 30px;
-        text-align: center;
-        margin-right: 10px;
-    } */
-    /* .sidebar-group { margin-bottom: 8px; } */
+
     .sidebar-item {
         padding: 25px 16px;
         font-size: 14px;
@@ -838,20 +831,25 @@ button.form-select:hover:not(:disabled) {
     /* Form elements reused */
     .form-container{
       width: 100%;
-      /* background-color: #000; */
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
+
+    }
+
+    .form-group span{
+      display: block;
     }
         
     .form-group { 
-      margin-bottom: 16px; 
+      /* margin-bottom: 16px;  */
+      margin-top: 16px; 
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
+
+
     }
     .form-group label {
         font-size: 12px;
@@ -863,19 +861,26 @@ button.form-select:hover:not(:disabled) {
         padding: 0 4px;
 
     }
-    .form-group input, .form-group select {
-        padding: 20px 50px;
+    .form-group input, .form-group select, .form-group textarea{
+        padding: 20px 20px;
         border: 1px solid #ddd;
         border-radius: 8px;
         font-size: 14px;
         outline: none;
         width: 100%;
+        resize: none;
+        margin-bottom: 0;
+    }
+
+    .form-group select{
+      background: none;
     }
 
     .settings-btn{
       background-color: #FF8C00;
       padding: 16px 16px;
       width: 100%;
+      margin-top: 8px;
       color: var(--color-white);
       font-size: 14px;
       font-weight: 500;
@@ -888,31 +893,35 @@ button.form-select:hover:not(:disabled) {
     
 
     /* Profile */
-    .profile-pic {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-        position: relative;
+    .avatar-photo{
+      object-fit: cover;
+      border: 4px solid #FF8C00;
     }
-    .profile-pic .avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: contain;
+
+    .edit-avatar{
+      color: #FF8C00;
     }
-    .profile-pic .edit {
-        position: absolute;
-        /* width: 40px; */
-        /* height: 40px; */
-        text-align: center;
-        bottom: 20px;
-        right: calc(50% - 55px);
-        background: #fff;
-        border-radius: 50%;
-        padding: 4px 0 4px 0;
-        /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-        cursor: pointer;
-        font-size: 30px;
+
+    .logout-btn a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-red);
+      padding: 20px;
+      color: var(--color-white);
+      font-weight: 500;
+      font-size: 18px;
+      transition: .2s;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      
+    }
+
+    .logout-btn a:hover{
+      background: rgb(212, 2, 2);
+      color: #fffcfc;
     }
 
     /* Toggle */

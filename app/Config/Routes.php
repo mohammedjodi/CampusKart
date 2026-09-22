@@ -27,7 +27,7 @@ $routes->group('register', ['namespace' => 'App\Controllers\Auth'] ,function($ro
 
 //Authenticated User Routes
 
-$routes->group('' , function($routes){
+$routes->group('' ,['filter' => 'session'], function($routes){
     //Products Routes Group
     $routes->group('product' , ['namespace' => 'App\Controllers\Products'] ,function($routes){
         // Product Listings 
@@ -45,11 +45,24 @@ $routes->group('' , function($routes){
         $routes->get('preview/(:num)' , 'ProductsController::show/$1');
     });
 
-    //Profile 
+    //Profile Routes
     $routes->get('profile' , '\App\Controllers\ProfileController::index');
 
-    //Settings 
-    $routes->get('settings' , '\App\Controllers\SettingsController::index');
+    //Settings Routes
+    $routes->group('settings' , ['namespace' => '\App\Controllers'], function($routes){
+        $routes->get('' , 'SettingsController::index');
+        //profile Information Update
+        $routes->post('updateUserDetails' , 'SettingsController::updateProfileDetails' , ['as' => 'update-profile-details']);
+        // Account Information
+        $routes->post('updateAccountInformation' , 'SettingsController::updateAccountInformation' , ['as' => 'update-account-information']);
+        //School Information
+        $routes->post('updateSchoolInformation' , 'SettingsController::updateSchoolInformation' , ['as' => 'update-school-information']);
+        //Change Password
+        $routes->post('changePassword' , 'SettingsController::changePassword' , ['as' => 'change-password']);
+
+
+
+    });
 });
 
 

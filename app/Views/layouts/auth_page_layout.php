@@ -31,6 +31,11 @@
     <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css')?>">
     <!-- Default CSS -->
      <link rel="stylesheet" href="<?= base_url('css/styles.css')?>">
+     <!-- Ijabo -->
+     <link rel="stylesheet" href="<?= base_url('css/ijaboCropTool.min.css')?>">
+     <!--  -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">	
+
      
     <title><?= $this->renderSection('title')?> </title>
 </head>
@@ -51,7 +56,9 @@
     <script src="<?= base_url('vendors/scripts/layout-settings.js')?>"></script>
     <!-- Bootstrap js -->
      <script src="<?= base_url('bootstrap/js/bootstrap.bundle.min.js')?>"></script>
-     <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+     <!-- Jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>	
+
     
 </body>
 </html>

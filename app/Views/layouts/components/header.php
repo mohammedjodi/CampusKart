@@ -46,7 +46,7 @@
                     <a href="login" class="text-center">Signin </a>
                     <span>|</span>
                     <a href="register" class="text-center">Register</a>
-                    <button class="btn btn-success  "><a href="">Sell</a></button>
+                   <a href="login"> <button class="btn btn-success  ">Sell</button></a>
                 </div>
         
         </nav>

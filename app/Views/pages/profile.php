@@ -12,31 +12,39 @@
             <div class="ck-profile-cover"></div>
             <div class="ck-profile-main">
                 <div class="ck-avatar-wrapper">
-                    <img
-                        src="<?= base_url('src/images/img2.jpg')?>"
-                        alt="Profile Avatar"
-                        class="ck-profile-avatar">
+                    <?php if(isset($user->avatar)):?>
+                        <img
+                            src="<?= base_url($user->avatar)?>"
+                            alt="Profile Avatar"
+                            class="ck-profile-avatar">
+                    <?php  else : ?>
+                        <img
+                            src="<?= base_url('src/images/img2.jpg')?>"
+                            alt="Profile Avatar"
+                            class="ck-profile-avatar">
+                    <?php endif ?>
+                    
                 </div>
                 <div class="ck-profile-identity">
                     <div class="ck-profile-name-row">
-                        <h1 class="text-dark">Mohammed Jodi</h1>
+                        <h1 class="text-dark"><?= esc($user->first_name)?> <?= esc($user->last_name)?></h1>
                         <span class="ck-verified">
                             <i class="fa fa-check"></i>
                         </span>
                     </div>
-                    <p class="ck-username">@mohammedjodi</p>
+                    <p class="ck-username">@<?= esc($user->username)?></p>
                     <div class="ck-profile-meta">
                         <span>
                             <i class="fa fa-graduation-cap"></i>
-                            University of Lagos
+                            <?= esc($university['name'])?>
                         </span>
                         <span>
                             <i class="fa fa-map-marker"></i>
-                            Lagos, Nigeria
+                            <?= esc($state['name'])?>, Nigeria
                         </span>
                         <span>
                             <i class="fa fa-calendar"></i>
-                            Joined September 2026
+                            <?= date('F j, Y' , strtotime($user->created_at))?>
                         </span>
                     </div>
                 </div>
@@ -106,7 +114,7 @@
                             </div>
                             <div>
                                 <small>Name</small>
-                                <p>Mohammed Jodi</p>
+                                <p><?= esc($user->first_name)?> <?= esc($user->last_name)?></p>
                             </div>
                         </div>
                         <div class="ck-info-item">
@@ -115,7 +123,7 @@
                             </div>
                             <div>
                                 <small>University</small>
-                                <p>University of Lagos</p>
+                                <p><?= esc($university['name'])?></p>
                             </div>
                         </div>
                         <div class="ck-info-item">
@@ -124,7 +132,7 @@
                             </div>
                             <div>
                                 <small>Location</small>
-                                <p>Lagos, Nigeria</p>
+                                <p><?= esc($state['name'])?>, Nigeria</p>
                             </div>
                         </div>
                         <div class="ck-info-item">
@@ -133,7 +141,7 @@
                             </div>
                             <div>
                                 <small>Member since</small>
-                                <p>September 2026</p>
+                                <p><?= date('F j, Y' , strtotime($user->created_at))?></p>
                             </div>
                         </div>
                     </div>
@@ -143,10 +151,16 @@
                     <div class="ck-card-title">
                         <h2>About</h2>
                     </div>
-                    <p class="ck-about-text">
-                        Student at the University of Lagos.
-                        Buy, sell and discover useful items around campus.
-                    </p>
+                    <?php if(!empty($user->bio)) :?>
+                        <p class="ck-about-text">
+                             <?= esc($user->bio)?>        
+                        </p>
+                    <?php else :?>
+                        <p class="ck-about-text">
+                            User Bio is Empty
+                        </p>
+                    <?php endif?>
+                    
                 </div>
                 <!-- SELLER INFORMATION -->
                 <div class="ck-info-card">
@@ -227,7 +241,7 @@
                     <h2>My Listings</h2>
                     <p>Items currently listed for sale.</p>
                 </div>
-                <a href="<?= base_url('products/create') ?>"
+                <a href="<?= base_url('product/create') ?>"
                 class="ck-add-listing">
                     <i class="fa fa-plus"></i>
                     Add Listing
