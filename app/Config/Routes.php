@@ -32,15 +32,12 @@ $routes->group('' ,['filter' => 'session'], function($routes){
     $routes->group('product' , ['namespace' => 'App\Controllers\Products'] ,function($routes){
         // Product Listings 
         $routes->get('/' , 'ProductsController::index');
-
         //Step 1 Basic Product information
         $routes->get('create' , 'ProductsController::create');
         $routes->post('create' , 'ProductsController::StoreBasic');
-
         //Step 2 Product Details
         $routes->get('create/details' , 'ProductsController::details');
         $routes->post('create/details' , 'ProductsController::store');
-
         //Single product 
         $routes->get('preview/(:num)' , 'ProductsController::show/$1');
     });
@@ -59,9 +56,6 @@ $routes->group('' ,['filter' => 'session'], function($routes){
         $routes->post('updateSchoolInformation' , 'SettingsController::updateSchoolInformation' , ['as' => 'update-school-information']);
         //Change Password
         $routes->post('changePassword' , 'SettingsController::changePassword' , ['as' => 'change-password']);
-
-
-
     });
 });
 

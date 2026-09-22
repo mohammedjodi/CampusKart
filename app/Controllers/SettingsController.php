@@ -292,6 +292,4 @@ class SettingsController extends BaseController
 
     }
 
-
-    
 }
