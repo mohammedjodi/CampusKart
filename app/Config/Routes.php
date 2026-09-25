@@ -7,17 +7,13 @@ use App\Controllers\Auth\RegisterController;
 /** @var RouteCollection $routes */
 // $routes->get('/', 'Home::index');
 
-// Base Page
-$routes->get('/', '\App\Controllers\HomeController::index');
-
-
 service('auth')->routes($routes , ['except' => ['register']]);
 //custom routes for shield 
 $routes->get('register' , '\App\Controllers\Auth\RegisterController::registerView');
 $routes->post('register' , '\App\Controllers\Auth\RegisterController::registerAction');
 
 
-//AJAX ROUTES
+//AJAX ROUTES User Registeration
 $routes->group('register', ['namespace' => 'App\Controllers\Auth'] ,function($routes){
     // Route for Js to get our Universities using state_id 
     $routes->get('universities/(:num)' , 'RegisterController::Universities/$1');
@@ -25,21 +21,28 @@ $routes->group('register', ['namespace' => 'App\Controllers\Auth'] ,function($ro
     $routes->post('validate-field' , 'RegisterController::validateField');
 });
 
-//Authenticated User Routes
+//Normal Guest Routes
+ $routes->group('', function($routes){
+    // Base Page
+    $routes->get('/', '\App\Controllers\HomeController::index');
+    // Product Listings 
+    $routes->get('products/listings' , '\App\Controllers\Products\ProductsController::index');
+    //Single product 
+    $routes->get('products/preview/(:num)' , '\App\Controllers\Products\ProductsController::show/$1');
+    
+ });
 
+//Authenticated User Routes
 $routes->group('' ,['filter' => 'session'], function($routes){
     //Products Routes Group
-    $routes->group('product' , ['namespace' => 'App\Controllers\Products'] ,function($routes){
-        // Product Listings 
-        $routes->get('/' , 'ProductsController::index');
+    $routes->group('products' , ['namespace' => 'App\Controllers\Products'] ,function($routes){
         //Step 1 Basic Product information
         $routes->get('create' , 'ProductsController::create');
         $routes->post('create' , 'ProductsController::StoreBasic');
         //Step 2 Product Details
         $routes->get('create/details' , 'ProductsController::details');
         $routes->post('create/details' , 'ProductsController::store');
-        //Single product 
-        $routes->get('preview/(:num)' , 'ProductsController::show/$1');
+
     });
 
     //Profile Routes

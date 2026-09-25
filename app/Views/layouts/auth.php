@@ -37,30 +37,63 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-between py-2 px-2">
-      
-      <!-- Left: Hamburger + Logo IMG -->
-      <div class="d-flex align-items-center gap-2">
-        <!-- Logo Image -->
-        <a href="/">
-          <img src="<?= base_url('images/Logo.png')?>" alt="CampusKart Logo" class="header-logo">
+<header class="ck-header">
+    <div class="ck-header-inner">
+
+        <!-- Logo -->
+        <a href="<?=base_url('/')?>" class="ck-logo"><img src="<?= base_url('images/Logo.png')?>" alt="Logo"> </a>
+
+        <div class="slogan">
+            <h2 class="text-center ">Sell Faster, Buy cheaper </h2>
+        </div>
+
+        <!-- Actions -->
+        <div class="ck-header-actions">
+                <div class="links">
+                    <a href="login" class="text-center"> <i class="fa-solid fa-right-to-bracket"></i> </a>
+                    <span>|</span>
+                    <a href="register" class="text-center"><i class="fa-solid fa-user-plus"></i></a>
+                </div>
+        
+            <a href="<?= base_url('products/create') ?>" class="ck-sell-btn">
+                Sell
+            </a>
+
+            <!-- Mobile menu -->
+            <button class="ck-menu-btn" id="ckMenuBtn" type="button"
+                    aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="ck-mobile-menu" id="ckMobileMenu">
+
+        <a href="<?= base_url('/') ?>">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
         </a>
-      </div>
 
-       
-        <!-- <div class=" d-flex gap-2 text-white  slogan">
-          <a href="/login" class="text-white text-decoration-none auth-links">Signin</a>
-          <span class="auth-links">|</span>
-          <a href="/register" class="text-white text-decoration-none auth-links">Register</a>
-        </div> -->
+        <a href="#">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Signin</span>
+        </a>
 
-      </div>
+        <a href="#">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Register</span>
+        </a>
+        
+        <a href="<?= base_url('products/create') ?>" class="mobile-sell">
+            <i class="fa-solid fa-plus"></i>
+            <span>Sell an item</span>
+        </a>
 
     </div>
-  </div>
 </header>
+
 
 
 
@@ -80,5 +113,13 @@
     <!-- Defualt js -->
 
     <script src="<?= base_url('js/MultiStepForm.js')?>"></script>
+    <script>
+    const ckMenuBtn = document.getElementById('ckMenuBtn');
+    const ckMobileMenu = document.getElementById('ckMobileMenu');
+
+    ckMenuBtn.addEventListener('click', () => {
+        ckMobileMenu.classList.toggle('active');
+    });
+</script>
 </body>
 </html>

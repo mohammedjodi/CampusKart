@@ -11,7 +11,7 @@
 <div class=" post-container">
 
   <div class="top-bar d-flex justify-content-between align-items-center">
-    <div class="fw-semibold ">Post Product </div>
+    <div class="fw-semibold ">Post an Item </div>
     <a href="#" id="clearBtn" class="text-decoration-none" style="color: #F87171;">Clear</a>
   </div>
 
