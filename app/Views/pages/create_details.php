@@ -11,13 +11,13 @@
   <!-- TOP BAR: Back | Post ad | Clear -->
   <div class="bg-white rounded d-flex justify-content-between align-items-center px-3 py-2 mb-3">
     <a href="#" class="text-success text-decoration-none"><i class="fa-solid fa-chevron-left"></i> Back</a>
-    <div class="fw-bold">Post Product</div>
+    <div class="fw-bold">Post an Item</div>
     <a href="#" class="text-danger text-decoration-none">Clear</a>
   </div>
 
   <form>
     <!-- SECTION 1: PRODUCT DETAILS -->
-    <div class="bg-white rounded p-3 mb-3">
+    <div class="bg-white rounded p-3 mb-3 shadow-sm">
       <div class="row g-3">
        <div class="col-md-6">
         <div class="select-wrapper">

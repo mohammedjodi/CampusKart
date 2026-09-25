@@ -1,55 +1,163 @@
 
 <?php if(auth()->loggedIn()) :?>
-    <header >
-        <div class="container profile-header">
+    <header class="ck-header">
+    <div class="ck-header-inner">
 
-        <div class="logo">
-            <a href="<?=base_url('/')?>"><img src="<?= base_url('images/Logo.png')?>" alt="Logo"> </a>
-        </div>
-        <div class="header-right">
-            <div class="header-icon"><i class="icon-copy fa fa-bookmark-o" aria-hidden="true"></i></div>
-            <div class="header-icon"><i class="icon-copy dw dw-chat3"></i></div>
-            <div class="header-icon"><i class="icon-copy dw dw-bell"></i></div>
-            <div class="header-icon"><i class="icon-copy dw-list"></i></div>
-            <div class="header-icon"><a href="<?= base_url('profile')?>"><i class="icon-copy dw dw-user text-dark"></i></a></div>
-            <a href="<?= base_url('product/create') ?>"><button class="btn btn-success px-4">SELL</button></a>
-        </div>
-    </header>
+        <!-- Logo -->
+        <a href="<?=base_url('/')?>" class="ck-logo"><img src="<?= base_url('images/Logo.png')?>" alt="Logo"> </a>
 
-<!-- MOBILE OFFCANVAS MENU -->
-<!-- <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
-  <div class="offcanvas-header  text-white">
-    <img src="images/Logo.png" alt="CampusKart Logo" class="logo">
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-  </div>
-  <div class="offcanvas-body">
-    <a href="#" class="d-block py-2 text-dark">Sign in</a>
-    <a href="#" class="d-block py-2 text-dark">Registration</a>
-    <hr>
-    <a href="#" class="d-block py-2 text-dark">Categories</a>
-    <a href="#" class="d-block py-2 text-dark   ">My Ads</a>
-  </div>
-</div> -->
+        <div class="slogan">
+            <h2 class="text-center ">Sell Faster, Buy cheaper </h2>
+        </div>
+
+        <!-- Actions -->
+        <div class="ck-header-actions">
+
+            <a href="#" class="ck-icon-btn" aria-label="Saved">
+                <i class="fa-regular fa-bookmark"></i>
+            </a>
+
+            <a href="#" class="ck-icon-btn" aria-label="Messages">
+                <i class="fa-regular fa-comment"></i>
+            </a>
+
+            <a href="#" class="ck-icon-btn" aria-label="Notifications">
+                <i class="fa-regular fa-bell"></i>
+            </a>
+             <a href="<?= base_url('logout')?>" class="ck-icon-btn" aria-label="Profile">
+                 </i>
+            </a>
+
+            <a href="<?= base_url('profile')?>" class="ck-icon-btn" aria-label="Profile">
+                <i class="fa-regular fa-user"></i>
+            </a>
+           
+            <a href="<?= base_url('products/create') ?>" class="ck-sell-btn">
+                Sell
+            </a>
+
+            <!-- Mobile menu -->
+            <button class="ck-menu-btn" id="ckMenuBtn" type="button"
+                    aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="ck-mobile-menu" id="ckMobileMenu">
+
+        <a href="<?= base_url('/') ?>">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="#">
+            <i class="fa-regular fa-bookmark"></i>
+            <span>Saved</span>
+        </a>
+
+        <a href="#">
+            <i class="fa-regular fa-comment"></i>
+            <span>Messages</span>
+        </a>
+
+        <a href="#">
+            <i class="fa-regular fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+
+        <a href="<?= base_url('profile')?>">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
+        </a>
+        <a href="<?= base_url('logout')?>">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+
+
+        <a href="<?= base_url('products/create') ?>" class="mobile-sell">
+            <i class="fa-solid fa-plus"></i>
+            <span>Sell an item</span>
+        </a>
+
+    </div>
+</header>
+<script>
+    const ckMenuBtn = document.getElementById('ckMenuBtn');
+    const ckMobileMenu = document.getElementById('ckMobileMenu');
+
+    ckMenuBtn.addEventListener('click', () => {
+        ckMobileMenu.classList.toggle('active');
+    });
+</script>
 
 <?php else : ?>
 
-    <header class="w-100 shadow-sm" >
-        <nav class="container py-2 px-2">
-        
-                <div class="logo ">
-                    <img src="<?= base_url('images/Logo.png')?>" alt="">
-                </div>
-                <div class="slogan">
-                    <h2 class="text-center ">Sell Faster, Buy cheaper </h2>
-                </div>
-                <div class="links">
-                    <a href="login" class="text-center">Signin </a>
-                    <span>|</span>
-                    <a href="register" class="text-center">Register</a>
-                   <a href="login"> <button class="btn btn-success  ">Sell</button></a>
-                </div>
-        
-        </nav>
-    </header>
+<header class="ck-header">
+    <div class="ck-header-inner">
 
+        <!-- Logo -->
+        <a href="<?=base_url('/')?>" class="ck-logo"><img src="<?= base_url('images/Logo.png')?>" alt="Logo"> </a>
+
+        <div class="slogan">
+            <h2 class="text-center ">Sell Faster, Buy cheaper </h2>
+        </div>
+
+        <!-- Actions -->
+        <div class="ck-header-actions">
+                <div class="links">
+                    <a href="login" class="text-center"> <i class="fa-solid fa-right-to-bracket"></i> </a>
+                    <span>|</span>
+                    <a href="register" class="text-center"><i class="fa-solid fa-user-plus"></i></a>
+                </div>
+        
+            <a href="<?= base_url('products/create') ?>" class="ck-sell-btn">
+                Sell
+            </a>
+
+            <!-- Mobile menu -->
+            <button class="ck-menu-btn" id="ckMenuBtn" type="button"
+                    aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="ck-mobile-menu" id="ckMobileMenu">
+
+        <a href="<?= base_url('/') ?>">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Signin</span>
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Register</span>
+        </a>
+        
+        <a href="<?= base_url('products/create') ?>" class="mobile-sell">
+            <i class="fa-solid fa-plus"></i>
+            <span>Sell an item</span>
+        </a>
+
+    </div>
+</header>
+<script>
+    const ckMenuBtn = document.getElementById('ckMenuBtn');
+    const ckMobileMenu = document.getElementById('ckMobileMenu');
+
+    ckMenuBtn.addEventListener('click', () => {
+        ckMobileMenu.classList.toggle('active');
+    });
+</script>
 <?php endif; ?>
