@@ -129,3 +129,7 @@ _modules/*
 #User Images 
 /public/uploads/avatars/*
 !/public/uploads/avatars/.gitKeep
+<<<<<<< HEAD
+=======
+!/public/uploads/product_images/.gitKeep
+>>>>>>> 4935158 (Added to gitignore)
