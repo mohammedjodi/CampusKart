@@ -138,7 +138,7 @@ function checkForm() {
     postBtn.disabled = !isValid;
 }
 
-
+// Validating Inputs 
 description.addEventListener('input', () => {
     const descriptionCount = document.getElementById('descCount');
     const count = description.value.length;
@@ -152,14 +152,3 @@ description.addEventListener('input', () => {
 brand.addEventListener('change', checkForm);
 condition.addEventListener('change', checkForm);
 price.addEventListener('input', checkForm);
-
-
-// DEBUG :(
-
-const form = document.querySelector('form');
-
-// form.addEventListener('submit' , function(e){
-//     e.preventDefault()
-//         console.log(photoInput?.files);
-
-// })
