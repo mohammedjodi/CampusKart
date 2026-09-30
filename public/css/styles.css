@@ -2032,6 +2032,80 @@ footer{
 
 
 /* ========================================== Sell Product Page ========================================= */
+/* ======================================
+    ALMOST THERE CARD 
+========================================= */
+.almost-there-card{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    margin-bottom: 20px;
+    background: var(--color-bg-nav);
+    border: 1px solid var(--ck-primary);
+    border-radius: 15px;
+}
+
+.almost-there-icon{
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ck-green);
+    color: #fff;
+    border-radius: 50%;
+
+    font-size: 17px;
+}
+
+.almost-there-content h6{
+    margin: 0 0 5px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+.almost-there-content p{
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.almost-there-content strong{
+    color: #fff;
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .almost-there-card{
+        align-items: flex-start;
+        padding: 15px;
+        gap: 12px;
+
+    }
+    
+    .almost-there-icon{
+        flex-basis: 38px;
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+
+    }
+
+    .almost-there-content h6{
+        font-size: 14px;
+
+    }
+
+    .almost-there-content p{
+        font-size: 12px;
+    }
+}
 
 .form-select {
   /* background-color: #fff; */

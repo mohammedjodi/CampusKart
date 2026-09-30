@@ -38,10 +38,10 @@ $routes->group('' ,['filter' => 'session'], function($routes){
     $routes->group('products' , ['namespace' => 'App\Controllers\Products'] ,function($routes){
         //Step 1 Basic Product information
         $routes->get('create' , 'ProductsController::create');
-        $routes->post('create' , 'ProductsController::StoreBasic');
+        $routes->post('create' , 'ProductsController::StoreBasicInfo' , ['as' => 'StoreBasicInfo']);
         //Step 2 Product Details
         $routes->get('create/details' , 'ProductsController::details');
-        $routes->post('create/details' , 'ProductsController::store');
+        $routes->post('create/details' , 'ProductsController::store' , ['as' => 'store']);
 
     });
 
