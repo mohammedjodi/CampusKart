@@ -15,38 +15,12 @@
             <button type="button" class="category-chip ">
                 All
             </button>
-
-            <button type="button" class="category-chip active">
-                Electronics
+        <?php foreach($categories as $category):?>
+            <button type="button" class="category-chip  <?= $category['id'] ===  $product['category_id'] ? 'active' : ''?> ">
+                <?= esc($category['name'])?>
             </button>
-
-            <button type="button" class="category-chip">
-                Books & Stationery
-            </button>
-
-            <button type="button" class="category-chip">
-                Fashion & Accessories
-            </button>
-
-            <button type="button" class="category-chip">
-                Sports & Outdoors
-            </button>
-
-            <button type="button" class="category-chip">
-                Home & Living
-            </button>
-
-            <button type="button" class="category-chip">
-                Health & Beauty
-            </button>
-
-            <button type="button" class="category-chip">
-                Food & Beverages
-            </button>
-
-            <button type="button" class="category-chip">
-                Services
-            </button>
+        <?php endforeach?>
+            
 
         </div>
 
@@ -71,7 +45,7 @@
 
                 <img
                     id="mainProductImage"
-                    src="https://images.unsplash.com/photo-1592286927505-2fd7c9d5f5f0?auto=format&fit=crop&w=300&q=80"
+                    src="<?= base_url($images[0]['image_path'] ?? 'https://via.placeholder.com/500') ?>"
                     alt="iPhone 13"
                 >
 
@@ -93,57 +67,26 @@
 
             </div>
 
-
             <!-- Thumbnails -->
             <div class="product-thumbnails">
-
+            <?php foreach($images as $image) : ?>
+            
                 <button
                     type="button"
                     class="product-thumbnail active"
                     onclick="changeProductImage(this)"
                 >
                     <img
-                        src="https://images.unsplash.com/photo-1592286927505-2fd7c9d5f5f0?auto=format&fit=crop&w=300&q=80"
+                        src="<?= base_url($image['image_path'] ?? 'https://via.placeholder.com/500') ?>"
                         alt="iPhone front"
                     >
-                </button>
-
-                <button
-                    type="button"
-                    class="product-thumbnail"
-                    onclick="changeProductImage(this)"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1603921326210-6edd2d60ca68?auto=format&fit=crop&w=300&q=80"
-                        alt="iPhone back"
-                    >
-                </button>
-
-                <button
-                    type="button"
-                    class="product-thumbnail"
-                    onclick="changeProductImage(this)"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1611791484670-ce19b801d192?auto=format&fit=crop&w=300&q=80"
-                        alt="iPhone side"
-                    >
-                </button>
-
-                <button
-                    type="button"
-                    class="product-thumbnail"
-                    onclick="changeProductImage(this)"
-                >
-                    <img
-                        src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=300&q=80"
-                        alt="iPhone"
-                    >
-                </button>
+                </button> 
+            <?php endforeach?>
 
             </div>
 
         </div>
+
 
 
         <!-- =====================================
@@ -152,7 +95,7 @@
         <div class="product-info-card">
 
             <h1 class="single-product-title">
-                iPhone 13 (128GB)
+                <?= esc($product['title'])?>
             </h1>
 
 
@@ -160,7 +103,8 @@
             <div class="product-status-row">
 
                 <span class="condition-badge">
-                    Used
+                    <?= esc($product['condition_name'])?>
+
                 </span>
 
                 <span class="verified-badge">
@@ -173,7 +117,8 @@
 
             <!-- Price -->
             <div class="single-product-price">
-                ₦420,000
+                ₦<?= number_format($product['price'])?>
+
             </div>
 
 
@@ -182,68 +127,17 @@
 
                 <span>
                     <i class="fa-solid fa-location-dot"></i>
-                    Lagos State, Yaba
+                    <?= esc($product['university_name'])?>
+
                 </span>
 
-                <span class="meta-divider"></span>
+                <!-- <span class="meta-divider"></span> -->
 
                 <span>
-                    <i class="fa-regular fa-clock"></i>
-                    2 hours ago
+                    <i class="fa-solid fa-clock"></i>
+                        <?= timeAgo($product['created_at'])?>
+
                 </span>
-
-            </div>
-
-
-            <!-- Quick Details -->
-            <div class="product-quick-details">
-
-                <div class="quick-detail">
-
-                    <i class="fa-brands fa-apple"></i>
-
-                    <div>
-                        <span>Brand</span>
-                        <strong>Apple</strong>
-                    </div>
-
-                </div>
-
-
-                <div class="quick-detail">
-
-                    <i class="fa-solid fa-mobile-screen-button"></i>
-
-                    <div>
-                        <span>Model</span>
-                        <strong>iPhone 13</strong>
-                    </div>
-
-                </div>
-
-
-                <div class="quick-detail">
-
-                    <i class="fa-solid fa-hard-drive"></i>
-
-                    <div>
-                        <span>Storage</span>
-                        <strong>128GB</strong>
-                    </div>
-
-                </div>
-
-
-                <div class="quick-detail">
-
-                    <i class="fa-solid fa-box"></i>
-
-                    <div>
-                        <span>Condition</span>
-                        <strong>Good</strong>
-                    </div>
-
-                </div>
 
             </div>
 
@@ -310,10 +204,7 @@
 
             <div class="product-description">
 
-                Clean and neat iPhone 13 with 128GB storage.
-                Everything works perfectly including the camera,
-                Face ID and battery. No major scratches, just minor
-                signs of use. Comes with original charger and cable.
+                <?= esc($product['description'])?>
 
             </div>
 
@@ -327,32 +218,22 @@
 
                 <div class="detail-row">
                     <span>Brand</span>
-                    <strong>Apple</strong>
+                    <strong>     <?= esc($product['brand_name'])?></strong>
                 </div>
 
                 <div class="detail-row">
-                    <span>Model</span>
-                    <strong>iPhone 13</strong>
-                </div>
 
-                <div class="detail-row">
-                    <span>Storage</span>
-                    <strong>128GB</strong>
-                </div>
-
-                <div class="detail-row">
                     <span>Condition</span>
-                    <strong>Good</strong>
+                    <strong><?= esc($product['condition_name'])?></strong>
+
+
+
                 </div>
 
-                <div class="detail-row">
-                    <span>Color</span>
-                    <strong>Blue</strong>
-                </div>
 
                 <div class="detail-row">
                     <span>Category</span>
-                    <strong>Phones & Tablets</strong>
+                    <strong><?= esc($product['category_name'])?></strong>
                 </div>
 
             </div>
@@ -387,7 +268,7 @@
                 <div class="seller-avatar">
 
                     <img
-                        src="https://i.pravatar.cc/150?img=12"
+                        src="<?= base_url($product['seller_avatar'] ?? 'https://via.placeholder.com/500') ?>"
                         alt="Umar Faruq"
                     >
 
@@ -397,7 +278,7 @@
                 <div class="seller-name-area">
 
                     <h3>
-                        Umar Faruq
+                        <?= esc($product['seller_first_name'])?> <?= esc($product['seller_last_name'])?>
                     </h3>
 
                     <span class="seller-type">
@@ -421,7 +302,7 @@
 
 
                 <a
-                    href="#"
+                    href=""
                     class="view-profile-btn"
                 >
                     View Profile
@@ -442,7 +323,8 @@
                     </span>
 
                     <strong>
-                        LASU
+                        <?= esc($product['university_name'])?>
+
                     </strong>
 
                 </div>
@@ -457,7 +339,8 @@
                     </span>
 
                     <strong>
-                        Lagos State, Yaba
+                        <?= esc($product['state_name'])?>
+
                     </strong>
 
                 </div>
@@ -472,7 +355,7 @@
                     </span>
 
                     <strong>
-                        Jan 2024
+                        <?= date('F j, Y' , strtotime($product['seller_joined_at']))?>
                     </strong>
 
                 </div>
@@ -524,75 +407,75 @@
 
     </div>
 
-   <section class=" show-product-category product-section all-products  container" id="all-products">
+   <section class="  show-product-category product-section all-products  container" id="all-products">
 
     <!-- Products -->
-    <div class="product-grid marketplace-grid">
+    <div class="preview-product-grid">
 
-        <?php for ($i = 1; $i <= 8; $i++): ?>
+        <?php foreach ($relatedProducts as $rp) : ?>
 
-            <article class="product-card">
+             <article class="home-product-card">
+             <a href="<?= route_to('listing.view' , $rp['id'])?>?category=<?= esc($category['name'])?>">
 
-                <div class="product-image">
+                <div class="home-product-image">
+
 
                     <img
-                        src="<?= base_url('public/assets/images/products/product-' . $i . '.jpg') ?>"
-                        alt="CampusKart product"
+                        src="<?= base_url($rp['image_path'] ?? 'https://via.placeholder.com/500') ?>"
+                        alt="<?= esc($rp['title']) ?>"
                     >
 
                     <button
                         type="button"
-                        class="favorite-btn"
-                        aria-label="Add to favourites"
+                        class="home-favorite"
                     >
                         <i class="fa-regular fa-heart"></i>
                     </button>
 
                 </div>
 
+                <div class="home-product-body">
 
-                <div class="product-body">
+                    <span class="home-condition my-3">
+                        <?= esc($rp['condition_name']) ?>
 
-                    <div class="product-category">
-                        Electronics
-                    </div>
+                    </span>
 
-                    <h3>
-                        Campus Product <?= $i ?>
+                    <a class="home-product-title" href="<?= route_to('listing.view' , $rp['id'])?>"><h3 class="home-product-title">
+                        <?= esc($rp['title']) ?>
                     </h3>
+                    </a>
 
+                    <p class="home-product-description">
+                        <?= esc(mb_strimwidth($rp['description'] ?? '', 0, 140, '...')) ?>
+                    </p>
 
-                    <div class="product-meta">
+                    <strong class="home-price">
+                        ₦<?= number_format($rp['price']) ?>
+                    </strong>
+
+                    <div class="home-meta">
 
                         <span>
                             <i class="fa-solid fa-location-dot"></i>
-                            Your Campus
+                            <?= esc($rp['university_name']) ?>
                         </span>
 
                         <span>
-                            <?= $i ?>h ago
+                            <i class="fa-solid fa-clock"></i>
+                            <?= timeAgo($rp['created_at']) ?>
                         </span>
 
                     </div>
 
-
-                    <div class="product-footer">
-
-                        <strong>
-                            ₦<?= number_format(5000 + ($i * 5000)) ?>
-                        </strong>
-
-                        <span class="condition">
-                            Good
-                        </span>
-
-                    </div>
+                   
 
                 </div>
-
+            </a>
             </article>
+            
 
-        <?php endfor; ?>
+        <?php endforeach; ?>
 
     </div>
 

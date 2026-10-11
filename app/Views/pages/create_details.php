@@ -167,4 +167,3 @@
 <script src="<?= base_url('js/details.js')?>"></script>
 
 <?= $this->endSection('content')?>
-

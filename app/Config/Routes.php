@@ -28,7 +28,7 @@ $routes->group('register', ['namespace' => 'App\Controllers\Auth'] ,function($ro
     // Product Listings 
     $routes->get('products/listings' , '\App\Controllers\Products\ProductsController::index');
     //Single product 
-    $routes->get('products/preview/(:num)' , '\App\Controllers\Products\ProductsController::show/$1');
+    $routes->get('products/listing/(:num)' , '\App\Controllers\Products\ProductsController::view/$1' , ['as' => 'listing.view']);
     
  });
 
@@ -42,6 +42,23 @@ $routes->group('' ,['filter' => 'session'], function($routes){
         //Step 2 Product Details
         $routes->get('create/details' , 'ProductsController::details');
         $routes->post('create/details' , 'ProductsController::store' , ['as' => 'store']);
+        // Edit flow Step 1
+        $routes->get('(:num)/edit', 'ProductsController::editBasic/$1' , ['as' => 'edit-basic']);
+        $routes->post('(:num)/edit', 'ProductsController::StoreEditBasicInfo/$1');
+        // Edit flow Step 2
+        $routes->get('(:num)/edit/details', 'ProductsController::editDetails/$1' , ['as' => 'edit-details']);
+        $routes->post('(:num)/edit/details', 'ProductsController::update/$1' , );
+        //Mark Product As Sold 
+        $routes->post('(:num)/sold', 'ProductsController::markAsSold/$1' , ['as' => 'markAsSold']);
+        //Mark Product As Active
+        $routes->post('(:num)/active', 'ProductsController::markAsActive/$1' , ['as' => 'markAsActive']);
+        //Delete Product
+        $routes->post('(:num)/delete', 'ProductsController::delete/$1' , ['as' => 'delete']);
+        //Delete Image 
+        $routes->get('image/(:num)/delete', 'ProductsController::deleteImage/$1');
+        //My-Listings
+        $routes->get('my-listings' , 'ProductsController::MyListings' , ['as' => 'my-listings']);
+ 
 
     });
 
