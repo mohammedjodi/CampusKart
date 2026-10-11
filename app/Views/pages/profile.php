@@ -14,7 +14,7 @@
                 <div class="ck-avatar-wrapper">
                     <?php if(isset($user->avatar)):?>
                         <img
-                            src="<?= base_url($user->avatar)?>"
+                            src="<?= base_url($user->avatar ?? 'https://via.placeholder.com/500') ?>"
                             alt="Profile Avatar"
                             class="ck-profile-avatar">
                     <?php  else : ?>
@@ -235,101 +235,154 @@
         ====================================================== -->
         <section
             id="ck-profile-listings"
-            class="ck-tab-content ck-listings-content">
-            <div class="ck-listings-header">
-                <div>
-                    <h2>My Listings</h2>
-                    <p>Items currently listed for sale.</p>
-                </div>
-                <a href="<?= base_url('product/create') ?>"
-                class="ck-add-listing">
-                    <i class="fa fa-plus"></i>
-                    Add Listing
-                </a>
-            </div>
-            <!-- PRODUCT GRID -->
-            <div class="ck-listing-grid">
-                <!-- PRODUCT 1 -->
-                <article class="ck-product-card">
-                    <div class="ck-product-image">
-                        <img
-                            src="<?= base_url('assets/images/product-placeholder.jpg') ?>"
-                            alt="HP EliteBook">
-                        <span class="ck-product-status">
-                            Active
-                        </span>
-                    </div>
-                    <div class="ck-product-body">
-                        <h3>HP EliteBook 840 G5</h3>
-                        <strong class="ck-product-price">
-                            ₦280,000
-                        </strong>
-                        <div class="ck-product-meta">
-                            <span>
-                                <i class="fa fa-map-marker"></i>
-                                Lagos
-                            </span>
-                            <span>
-                                2 days ago
-                            </span>
-                        </div>
-                    </div>
-                </article>
-                <!-- PRODUCT 2 -->
-                <article class="ck-product-card">
-                    <div class="ck-product-image">
-                        <img
-                            src="<?= base_url('assets/images/product-placeholder.jpg') ?>"
-                            alt="iPhone 12 Pro">
-                        <span class="ck-product-status">
-                            Active
-                        </span>
-                    </div>
-                    <div class="ck-product-body">
-                        <h3>iPhone 12 Pro</h3>
-                        <strong class="ck-product-price">
-                            ₦450,000
-                        </strong>
-                        <div class="ck-product-meta">
-                            <span>
-                                <i class="fa fa-map-marker"></i>
-                                Lagos
-                            </span>
-                            <span>
-                                5 days ago
-                            </span>
-                        </div>
-                    </div>
-                </article>
-                <!-- PRODUCT 3 -->
-                <article class="ck-product-card">
-                    <div class="ck-product-image">
-                        <img
-                            src="<?= base_url('assets/images/product-placeholder.jpg') ?>"
-                            alt="AirPods Pro">
-                        <span class="ck-product-status">
-                            Active
-                        </span>
-                    </div>
-                    <div class="ck-product-body">
-                        <h3>AirPods Pro</h3>
-                        <strong class="ck-product-price">
-                            ₦180,000
-                        </strong>
-                        <div class="ck-product-meta">
-                            <span>
-                                <i class="fa fa-map-marker"></i>
-                                Lagos
-                            </span>
-                            <span>
-                                1 week ago
-                            </span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
+            class="ck-tab-content ck-listings-content my-listings-section">
+
+    <div class="listings-header">
+        <div>
+            <h1>My Listings</h1>
+            <p>Items you currently have listed for sale.</p>
+        </div>
+
+        <a href="#" class="add-listing-btn">
+            <i class="fa-solid fa-plus"></i>
+            Add Listing
+        </a>
     </div>
+
+
+    <!-- Listing Filters -->
+    <div class="listing-filters">
+
+        <button class="listing-filter active" data-filter="all">
+            All
+        </button>
+
+        <button class="listing-filter" data-filter="Active">
+            Active
+        </button>
+
+        <button class="listing-filter" data-filter="Sold">
+            Sold
+        </button>
+
+    </div>
+
+<?php if(!empty($listings)) : ?>
+    <!-- Listings -->
+    <div class="listings-container">
+        <!-- Listing Card -->
+    <?php foreach($listings as $listing) : ?>
+        <article class="listing-card" data-status="<?=esc($listing['status_name'])?>">
+
+            <a href="#" class="listing-image">
+                <img src="<?= base_url($listing['image_path'] ?? 'https://via.placeholder.com/500') ?>" alt="">
+            </a>
+
+            <div class="listing-content">
+
+                <div class="listing-main">
+
+                    <div class="listing-title-row">
+
+                        <a href="#" class="listing-title">
+                            <?=esc($listing['title'])?>
+                        </a>
+
+                        <span class="listing-status <?= $listing['status_name'] === 'Active' ? 'active-status' : 'sold-status'?>">
+                            <?=esc($listing['status_name'])?>
+                        </span>
+
+                    </div>
+
+                    <div class="listing-price">
+                       ₦<?=number_format($listing['price'])?>
+                    </div>
+
+                    <div class="listing-meta">
+
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <?=esc($university['name'])?>
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-clock"></i><?= timeAgo($listing['created_at'])?>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Action Menu -->
+                <div class="listing-actions">
+
+                    <button class="listing-menu-btn" type="button" aria-label="Listing actions">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+
+                    <div class="listing-menu">
+
+                        <a href="<?= route_to('listing.view' , $listing['id'])?>">
+                            <i class="fa-regular fa-eye"></i>
+                            View Listing
+                        </a>
+
+                        <a href="#">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            Edit Listing
+                        </a>
+
+                        <button type="button">
+                            <i class="fa-solid fa-check"></i>
+                            Mark as Sold
+                        </button>
+
+                        <button type="button" class="delete-action">
+                            <i class="fa-regular fa-trash-can"></i>
+                            Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+        <!-- Empty State -->
+        <div class="listings-empty" hidden>
+
+            <div class="empty-icon">
+                <i class="fa-regular fa-rectangle-list"></i>
+            </div>
+
+            <h3>No listings found</h3>
+
+            <p>
+                You don't have any listings in this category.
+            </p>
+        </div>
+    <?php endforeach ?>
+<?php else :?>
+        <!-- Empty State -->
+        <div class="listings-empty" >
+
+            <div class="empty-icon">
+                <i class="fa-regular fa-rectangle-list"></i>
+            </div>
+
+            <h3>No listings found</h3>
+
+            <p>
+                You don't have any listings in this category.
+            </p>
+        </div>
+
+    </div>
+<?php endif?>
+
+</section>
     <!-- Defualt js -->
     <script src="<?= base_url('js/profile.js')?>"></script>
 <?= $this->endSection('content')?>

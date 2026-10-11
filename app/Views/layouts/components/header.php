@@ -17,6 +17,10 @@
                 <i class="fa-regular fa-bookmark"></i>
             </a>
 
+            <a href="<?= base_url('products/my-listings')?>" class="ck-icon-btn" aria-label="Listings">
+                <i class="fa-solid fa-layer-group"></i>
+            </a>
+
             <a href="#" class="ck-icon-btn" aria-label="Messages">
                 <i class="fa-regular fa-comment"></i>
             </a>
@@ -25,7 +29,7 @@
                 <i class="fa-regular fa-bell"></i>
             </a>
              <a href="<?= base_url('logout')?>" class="ck-icon-btn" aria-label="Profile">
-                 </i>
+                <i class="fa-solid fa-right-from-bracket"></i>
             </a>
 
             <a href="<?= base_url('profile')?>" class="ck-icon-btn" aria-label="Profile">
@@ -52,24 +56,28 @@
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
+        <a href="<?= base_url('products/my-listings')?>">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>My-Listings</span>
+        </a>
 
         <a href="#">
-            <i class="fa-regular fa-bookmark"></i>
+            <i class="fa-solid fa-bookmark"></i>
             <span>Saved</span>
         </a>
 
         <a href="#">
-            <i class="fa-regular fa-comment"></i>
+            <i class="fa-solid fa-comment"></i>
             <span>Messages</span>
         </a>
 
         <a href="#">
-            <i class="fa-regular fa-bell"></i>
+            <i class="fa-solid fa-bell"></i>
             <span>Notifications</span>
         </a>
 
         <a href="<?= base_url('profile')?>">
-            <i class="fa-regular fa-user"></i>
+            <i class="fa-solid fa-user"></i>
             <span>Profile</span>
         </a>
         <a href="<?= base_url('logout')?>">
@@ -91,6 +99,17 @@
 
     ckMenuBtn.addEventListener('click', () => {
         ckMobileMenu.classList.toggle('active');
+    });
+
+     /*
+    |--------------------------------------------------------------------------
+    | Close menu when clicking outside
+    |--------------------------------------------------------------------------
+    */
+
+    window.addEventListener('click', () => {
+        //ckMobileMenu.classList.remove('active');
+
     });
 </script>
 
@@ -158,6 +177,17 @@
 
     ckMenuBtn.addEventListener('click', () => {
         ckMobileMenu.classList.toggle('active');
+    });
+
+     /*
+    |--------------------------------------------------------------------------
+    | Close menu when clicking outside
+    |--------------------------------------------------------------------------
+    */
+
+    Window.addEventListener('click', () => {
+        //~ckMobileMenu.classList.remove('active');
+
     });
 </script>
 <?php endif; ?>
